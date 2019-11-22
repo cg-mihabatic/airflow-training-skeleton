@@ -7,7 +7,7 @@ from datetime import datetime
 
 args = {
   'owner': 'Miha',
-  'start_date': datetime.datetime(2019,11,17),
+  'start_date': datetime(2019,11,17),
 }
 
 dag = DAG(

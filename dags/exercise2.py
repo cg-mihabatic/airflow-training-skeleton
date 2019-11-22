@@ -17,7 +17,7 @@ dag = DAG(
 )
 
 def print_date (**context):
-  print(date.today())  
+  print("Date = " + str(date.today()))  
 
 print_execution_date = PythonOperator(
   task_id="print_execution_date",

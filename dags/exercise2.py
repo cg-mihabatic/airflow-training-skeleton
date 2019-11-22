@@ -7,13 +7,13 @@ from datetime import date
 
 args = {
   'owner': 'Miha',
-  'start_date': airflow.utils.dates.days_ago(2),
+  'start_date': date.datetime(2019,11,17),
+  'schedule_interval': "@daily",
 }
 
 dag = DAG(
     dag_id='exercise2',
     default_args=args,
-    schedule_interval='@once',
 )
 
 def print_date (**context):

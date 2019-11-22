@@ -13,7 +13,7 @@ args = {
 dag = DAG(
   dag_id='exercise2',
   default_args=args,
-  'schedule_interval': "@daily",
+  schedule_interval: "@daily",
 )
 
 def print_date (**context):

@@ -7,12 +7,12 @@ from datetime import datetime
 
 args = {
   'owner': 'Miha',
-  'start_date': datetime(2019,11,17),
 }
 
 dag = DAG(
   dag_id='exercise2',
   default_args=args,
+  start_date: datetime(2019,11,17),
   schedule_interval: "@daily",
 )
 

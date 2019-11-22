@@ -16,7 +16,6 @@ dag = DAG(
   default_args=args, 
   schedule_interval="0 0 * * *",
 )
-ds = 
 
 pgsl_to_gcs = PostgresToGoogleCloudStorageOperator(
   task_id="transfer_data_from_postgres",

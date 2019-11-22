@@ -8,12 +8,12 @@ from datetime import datetime
 args = {
   'owner': 'Miha',
   'start_date': datetime(2019,11,17),
-  'schedule_interval': "@daily",
 }
 
 dag = DAG(
-    dag_id='exercise2',
-    default_args=args,
+  dag_id='exercise2',
+  default_args=args,
+  'schedule_interval': "@daily",
 )
 
 def print_date (**context):

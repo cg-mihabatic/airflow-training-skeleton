@@ -31,7 +31,7 @@ currency = "EUR"
 transfer_currency = HttpToGcsOperator( 
   task_id="get_currency_" + currency, 
   method="GET",
-  endpoint=f"history?start_at={{prev_ds}}&end_at={{ds}}&symbols={currency}&base=GBP", 
+  endpoint="history?start_at={{yesterday_ds}}&end_at={{ds}}&symbols={currency}&base=GBP", 
   http_conn_id="airflow-training-currency-http",
   gcs_path="currency/{{ ds }}-" + currency + ".json", 
   gcs_bucket="airflow-training-data-1983",

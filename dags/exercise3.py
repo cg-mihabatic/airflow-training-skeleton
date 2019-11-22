@@ -2,6 +2,7 @@ import airflow
 from airflow.models import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.bash_operator import BashOperator
 from datetime import datetime
 
 args = {
@@ -28,7 +29,7 @@ print_execution_day = PythonOperator(
   dag=dag,
 )
 
-print_execution_date >> branching
+print_execution_day >> branching
 
 weekday_to_person = {
   0: "Bob",
@@ -44,9 +45,13 @@ branching = BranchPythonOperator(
   task_id="branching", python_callable=_get_weekday_number, provide_context=True, dag=dag
 )
 
+end_bash = BashOperator(
+  task_id="final_task", dag=dag,
+)
+
 list =[]
 for val in weekday_to_person.values(): 
   if val in list: 
     continue 
   else:
-    branching >> DummyOperator(task_id=f"email_{val}", dag=dag)
+    branching >> DummyOperator(task_id=f"email_{val}", dag=dag) >> end_bash

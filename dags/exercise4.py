@@ -4,7 +4,7 @@ from datetime import datetime
 from airflow.hooks.postgres_hook import PostgresHook
 from airflow.utils.decorators import apply_defaults
 from airflow.contrib.operators.postgres_to_gcs_operator import PostgresToGoogleCloudStorageOperator
-from airflow_training.operators import HttpToGcsOperator
+from airflow_training.operators.http_to_gcs_operator import HttpToGcsOperator
 
 args = {
   "owner": "Miha",

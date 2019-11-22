@@ -3,7 +3,7 @@ from airflow.models import DAG
 from datetime import datetime
 from airflow.hooks.postgres_hook import PostgresHook
 from airflow.utils.decorators import apply_defaults
-from airflow.operators.postgres_to_gcs import PostgresToGoogleCloudStorageOperator
+from airflow.contrib.operators.postgres_to_gcs_operator import PostgresToGoogleCloudStorageOperator
 
 
 args = {

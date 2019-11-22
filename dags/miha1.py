@@ -11,7 +11,6 @@ dag = DAG(
     dag_id='first_dag',
     default_args=args,
     schedule_interval='0 0 * * *',
-    dagrun_timeout=timedelta(minutes=60),
 )
 
 def print_awesome_string (**context):

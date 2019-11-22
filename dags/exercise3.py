@@ -29,8 +29,6 @@ print_execution_day = PythonOperator(
   dag=dag,
 )
 
-print_execution_day >> branching
-
 weekday_to_person = {
   0: "Bob",
   1: "Joe",
@@ -46,8 +44,11 @@ branching = BranchPythonOperator(
 )
 
 end_bash = BashOperator(
-  task_id="final_task", dag=dag,
+  task_id="final_task", bash_command=f"echo {{params.my_param}}", dag=dag, params={"my_param":"hello_there"},
 )
+
+
+print_execution_day >> branching
 
 list =[]
 for val in weekday_to_person.values(): 

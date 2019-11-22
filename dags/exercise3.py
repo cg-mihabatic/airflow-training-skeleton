@@ -1,6 +1,7 @@
 import airflow
 from airflow.models import DAG
 from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python_operator import BranchPythonOperator
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime
@@ -17,7 +18,7 @@ dag = DAG(
 )
 
 def print_day (execution_date, **context):
-  print("Date = " + execution_date.strftime("%a"))  
+  print("Day = " + execution_date.strftime("%a"))  
 
 def _get_weekday_number (execution_date, **context):
   return execution_date.weekday()

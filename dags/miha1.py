@@ -7,6 +7,13 @@ args = {
   'start_date': airflow.utils.dates.days_ago(2),
 }
 
+dag = DAG(
+    dag_id='first_dag',
+    default_args=args,
+    schedule_interval='0 0 * * *',
+    dagrun_timeout=timedelta(minutes=60),
+)
+
 def print_awesome_string (**context):
   print("This is beautiful\n")  
 

@@ -45,15 +45,18 @@ branching = BranchPythonOperator(
 )
 
 end_bash = BashOperator(
-  task_id="final_task", bash_command=f"echo {{params.my_param}}", dag=dag, params={"my_param":"hello_there"},
+  task_id="final_task", 
+  bash_command=f"echo {{params.my_param}}", 
+  trigger_rule=TriggerRule.ONE_SUCCESS, 
+  dag=dag, 
+  params={"my_param":"hello_there"},
 )
-
 
 print_execution_day >> branching
 
-list =[]
-for val in weekday_to_person.values(): 
-  if val in list: 
-    continue 
-  else:
-    branching >> DummyOperator(task_id=f"email_{val}", dag=dag) >> end_bash
+email_tasks = []
+for name in set(weekday_to_person.values())
+  email_task=DummyOperator(task_id=f"email_{name}", dag=dag)
+  email_tasks.append(email_task)
+
+branching >> email_tasks >> end_bash

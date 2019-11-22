@@ -40,8 +40,12 @@ weekday_to_person = {
   6: "Alice"
 }
 
+def _get_user_on_day(**context):
+  person = weekday_to_person[_get_weekday_number]
+  return f"email_{person}"
+
 branching = BranchPythonOperator(
-  task_id="branching", python_callable=_get_weekday_number, provide_context=True, dag=dag
+  task_id="branching", python_callable=_get_user_on_day, provide_context=True, dag=dag
 )
 
 end_bash = BashOperator(

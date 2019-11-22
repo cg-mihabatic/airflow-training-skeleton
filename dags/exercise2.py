@@ -3,11 +3,11 @@ from airflow.models import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.dummy_operator import DummyOperator
-from datetime import date
+from datetime import datetime
 
 args = {
   'owner': 'Miha',
-  'start_date': date.datetime(2019,11,17),
+  'start_date': datetime(2019,11,17),
   'schedule_interval': "@daily",
 }
 
@@ -17,7 +17,7 @@ dag = DAG(
 )
 
 def print_date (**context):
-  print("Date = " + str(date.today()))  
+  print("Date = " + str(datetime.today()))  
 
 print_execution_date = PythonOperator(
   task_id="print_execution_date",

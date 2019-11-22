@@ -4,7 +4,7 @@ from datetime import datetime
 from airflow.hooks.postgres_hook import PostgresHook
 from airflow.utils.decorators import apply_defaults
 from airflow.contrib.operators.postgres_to_gcs_operator import PostgresToGoogleCloudStorageOperator
-
+from airflow_training.operators import HttpToGcsOperator
 
 args = {
   "owner": "Miha",
@@ -25,3 +25,17 @@ pgsl_to_gcs = PostgresToGoogleCloudStorageOperator(
   postgres_conn_id="GoogleCloudSQL-miha",
   dag=dag,
 )
+
+currency = "EUR"
+
+transfer_currency = HttpToGcsOperator( 
+  task_id="get_currency_" + currency, 
+  method="GET",
+  endpoint=f"/history?start_at={{yesterday_ds}}&end_at={{ds}}&symbols={currency}&base=GBP", 
+  http_conn_id="airflow-training-currency-http",
+  gcs_path="currency/{{ ds }}-" + currency + ".json", 
+  gcs_bucket="airflow-training-data-1983",
+  dag=dag, 
+)
+
+pgsl_to_gcs >> transfer_currency

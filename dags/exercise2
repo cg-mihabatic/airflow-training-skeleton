@@ -31,4 +31,9 @@ the_end = DummyOperator(
     dag=dag,
 )
 
-print_execution_date >> the_end
+w1 = BashOperator(task_id="wait_5", bash_command="sleep 5", dag=dag,)
+w2 = BashOperator(task_id="wait_1", bash_command="sleep 1", dag=dag,)
+w3 = BashOperator(task_id="wait_10", bash_command="sleep 10", dag=dag,)
+
+print_execution_date >> [w1, w2, w3]
+[w1, w2, w3] >> the_end

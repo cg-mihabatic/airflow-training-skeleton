@@ -55,8 +55,9 @@ end_bash = BashOperator(
 print_execution_day >> branching
 
 email_tasks = []
-for name in set(weekday_to_person.values())
-  email_task=DummyOperator(task_id=f"email_{name}", dag=dag)
+
+for user_name in set(weekday_to_person.values()):
+  email_task=DummyOperator(task_id=f"email_{user_name}", dag=dag)
   email_tasks.append(email_task)
 
 branching >> email_tasks >> end_bash
